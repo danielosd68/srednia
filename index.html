@@ -1,0 +1,126 @@
+<!--Tytuł: Projekt średniej arytmetycznej ocen szkolnych-->
+<!--Wykonawca: Daniel Chyliński-->
+<!--Środowisko programistyczne: Visual Studio Code, XAMPP-->
+<!--Język programowania: JavaScript, HTML & CSS-->
+
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img.png">
+  <link rel="stylesheet" href="style.css" type="text/css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fontello/css/fontello.css" type="text/css">
+  <title>Kalkulator średniej ocen</title>
+
+
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="title">
+
+      <div id="title">Kalkulator średniej ocen</div>
+
+      <ul id="nav">
+        <a href="#">
+          <li>O mnie
+        </a>
+        <a href="#">
+          <li><i class="demo-icon icon-facebook-squared"></i>
+        </a>
+        <a href="#">
+          <li><i class="demo-icon icon-instagram"></i>
+        </a>
+      </ul>
+
+    </div>
+    <div class="content">
+      <h2>Kalkulator średniej ocen szkolnych</h2>
+
+      <div class="content-information">
+        <p>Narzędzie pozwoli ci na szybkie policzenie średniej arytmetycznej ocen i stwierdzi, czy będziesz
+          miał świadecto z paskiem na podstawie średniej. Nie musisz męczyć się korzystając z kalkulatora,
+          wprowadź wszystkie swoje oceny po przecinku np. 6, 5, 4 itp. Wprowadzone dane nie są gromadzone
+          przez serwer, także strona i wprowadzone oceny są w pełni bezpieczne.
+        </p><br><br>
+      </div>
+      <h3>Wprowadź swoje oceny:</h3>
+      <form action="#">
+        <input id="input-grades" type="text" name="grades">
+        <input id="submit" type="button" value="Oblicz"><br><br>
+      </form>
+      <p class="result"></p>
+    </div>
+
+
+  </div>
+  <script>
+    let submit = document.querySelector("#submit");
+    let resultParagraph = document.querySelector(".result");
+    let btn = submit.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      let grades = document.querySelector("#input-grades").value;
+      if (grades == "") {
+        resultParagraph.innerHTML = `Nie wprowadzono żadnych ocen!`;
+      }
+
+      else {
+        let gradeSum = 0;
+
+        let gradesArray = grades.split(",");
+
+        for (let i = 0; i < gradesArray.length; i++) {
+
+          if (gradesArray[i] > 0 && gradesArray[i] <= 6) {
+            gradesArray[i] = parseInt(gradesArray[i]);
+
+            gradeSum += gradesArray[i];
+          }
+
+          else {
+            return resultParagraph.innerHTML = `<span>Wprowadzono niepoprawne dane - popraw je!</span>`;
+          }
+
+
+
+
+        }
+
+        let result = (gradeSum / gradesArray.length).toFixed(2);
+
+
+        if (result >= 4.75) {
+          resultParagraph.innerHTML = `Twoja średnia to <span>${result}</span>, w związku z czym wychodzi Ci świadectwo z paskiem. Gratulacje!`;
+          if (result = 5.0) {
+            resultParagraph.innerHTML = `Twoja średnia to <span>${result}.0</span>, w związku z czym wychodzi Ci świadectwo z paskiem. Gratulacje!`;
+          }
+        }
+
+        else if (result === NaN) {
+          resultParagraph.innerHTML = `Twoja średnia to <span>${result}</span>, w związku z czym nie wychodzi Ci świadectwo z paskiem. Próbuj dalej, a na pewno się uda!`;
+        }
+        else {
+          resultParagraph.innerHTML = `Twoja średnia to <span>${result}</span>, w związku z czym nie wychodzi Ci świadectwo z paskiem. Próbuj dalej, a na pewno się uda!`;
+
+        }
+
+      }
+
+
+    });
+
+
+  </script>
+</body>
+
+</html>
